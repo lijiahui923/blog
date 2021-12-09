@@ -1,3 +1,11 @@
+/*
+ * @Description: main.js
+ * @Version: 1.0
+ * @Autor: lijiahui
+ * @Date: 2021-11-29 11:09:19
+ * @LastEditors: lijiahui
+ * @LastEditTime: 2021-12-09 15:49:42
+ */
 import Vue from 'vue'
 
 import Cookies from 'js-cookie'
@@ -19,7 +27,7 @@ import './permission' // permission control
 import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
-
+import components from './components'
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -28,7 +36,7 @@ import * as filters from './filters' // global filters
  * Currently MockJs will be used in the production environment,
  * please remove it before going online ! ! !
  */
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development') {
   const { mockXHR } = require('../mock')
   mockXHR()
 }
@@ -37,7 +45,7 @@ Vue.use(Element, {
   size: Cookies.get('size') || 'medium', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)
 })
-
+Vue.use(components)
 // register global utility filters
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])

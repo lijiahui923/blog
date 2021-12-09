@@ -1,3 +1,11 @@
+/*
+ * @Description: 请求工具
+ * @Version: 1.0
+ * @Autor: lijiahui
+ * @Date: 2021-11-15 09:58:35
+ * @LastEditors: lijiahui
+ * @LastEditTime: 2021-12-09 16:10:43
+ */
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
@@ -46,7 +54,7 @@ service.interceptors.response.use(
     const res = response.data
 
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
+    if (res.code !== 200) {
       Message({
         message: res.message || 'Error',
         type: 'error',
