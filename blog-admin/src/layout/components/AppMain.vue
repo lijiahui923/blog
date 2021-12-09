@@ -39,6 +39,8 @@ export default {
   .app-main {
     /* 84 = navbar + tags-view = 50 + 34 */
     min-height: calc(100vh - 84px);
+    background-color: #fafafa;
+    padding: 6px;
   }
 
   .fixed-header+.app-main {

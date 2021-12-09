@@ -1,13 +1,22 @@
 <template>
-  <div>
+  <div class="page-container">
+    <div class="page-top-operate">
+      <div class="operate-left">
+        <el-button @click="handleOperate('add')">新增</el-button>
+      </div>
+      <div class="operate-right">
+        <el-input class="operate-right-input" v-model="search"></el-input>
+        <el-button>搜索</el-button>
+      </div>
+    </div>
     <c-table
       :columns="columns"
       :data="articleData"
       :page-config="pageConfig"
     >
-    <template v-slot:image="{ row }">
-      <img :src="row.image"  alt="" />
-    </template>
+      <template v-slot:image="{ row }">
+        <img alt="" :src="row.image">
+      </template>
     </c-table>
   </div>
 </template>
@@ -27,6 +36,7 @@ export default {
   props: {},
   data() {
     return {
+      search: '',
       articleData: [],
       columns: [
         {
@@ -68,8 +78,28 @@ export default {
       const { data } = await fetchList()
       this.articleData = data.rows
       this.pageConfig.total = data.count
+    },
+    handleOperate(flag) {
+      this.$router.push('/articles-management/operate')
     }
   }
 }
 </script>
-<style scoped></style>
+<style scoped>
+.page-top-operate {
+    display: flex;
+    margin: 4px 0 10px;
+}
+.operate-left {
+    width: 50%;
+}
+.operate-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+.operate-right-input.el-input.el-input--mini {
+    width: 50%;
+    margin-right: 10px;
+}
+</style>

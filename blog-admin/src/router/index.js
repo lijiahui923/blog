@@ -57,12 +57,21 @@ export const asyncRoutes = [
   {
     path: '/articles-management',
     component: Layout,
+    // redirect: 'article',
     children: [
       {
         path: 'article',
         component: () => import('@/views/articles-management/index'),
-        name: 'Icons',
-        meta: { title: 'articles-management', icon: 'icon', noCache: true }
+        name: 'articles-management',
+        meta: { title: 'articles-management', icon: 'icon', noCache: true },
+        // children: [
+        //   {
+        //     path: 'operate',
+        //     component: () => import('@/views/articles-management/markdown.vue'),
+        //     name: 'article-operate',
+        //     meta: { title: 'article-operate', icon: 'icon', noCache: true }
+        //   }
+        // ]
       }
     ]
   }

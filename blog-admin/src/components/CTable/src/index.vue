@@ -6,6 +6,9 @@ import CPagination from '../components/c-pagination.vue'
 @createTime:2021-12-09
 @create:lijiahui
 */
+const defaultProps = {
+  'header-cell-style': { 'background-color': '#ebeef5' }
+}
 const defaultColumnsProps = {
   'show-overflow-tooltip': true,
   'min-width': 100
@@ -48,7 +51,7 @@ export default {
     renderTable(h) {
       const { $attrs, $listeners } = this
       const columns = this.renderColumns(h)
-      const props = Object.assign({}, $attrs, { data: this.data })
+      const props = Object.assign({}, defaultProps, $attrs, { data: this.data })
       return h(
         'el-table',
         {
