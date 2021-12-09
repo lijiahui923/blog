@@ -1,0 +1,11 @@
+POST http://localhost:7001/newRequest
+Content-Type: application/json
+# token: 'ljh001'
+# {
+#     "name": "egg",
+#     "version": "1.0.0"
+# }
+{
+    "age": 1,
+    "name": "xiaohong"
+}

@@ -1,0 +1,36 @@
+{
+  "name": "default",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "better-scroll": "^1.15.2",
+    "core-js": "^2.6.5",
+    "jump.js": "^1.0.2",
+    "nprogress": "^0.2.0",
+    "prerender-spa-plugin": "^2.1.0",
+    "puppeteer": "^5.3.1",
+    "qs": "^6.9.4",
+    "register-service-worker": "^1.7.2",
+    "socket.io-client": "^2.3.0",
+    "vconsole": "^3.3.4",
+    "vue": "^2.6.10",
+    "vue-router": "^3.3.4",
+    "vue-socket.io": "^3.0.10",
+    "vuex": "^3.5.1",
+    "weixin-js-sdk": "^1.6.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.8.0",
+    "@vue/cli-plugin-pwa": "^4.5.11",
+    "@vue/cli-service": "^3.8.0",
+    "pug": "^3.0.0",
+    "pug-html-loader": "^1.1.5",
+    "pug-plain-loader": "^1.0.0",
+    "vue-template-compiler": "^2.6.10"
+  }
+}

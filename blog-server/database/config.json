@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "123456",
+    "database": "ljh_blog",
+    "host": "139.196.220.37",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "123456",
+    "database": "ljh_blog",
+    "host": "139.196.220.37",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "123456",
+    "database": "ljh_blog",
+    "host": "139.196.220.37",
+    "dialect": "mysql"
+  }
+}
