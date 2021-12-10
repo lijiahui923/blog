@@ -1,16 +1,17 @@
 <template>
-  <div id="editor">
+  <div id="editor" class="page-container">
     <div class="top-container">
-      <el-input class="top-enter" v-model="editorForm.title" placeholder="输入文章标题..." />
+      <el-input v-model="editorForm.title" class="top-enter" placeholder="输入文章标题..." />
       <el-button type="primary" round @click="dialogFormVisible = true">发布</el-button>
+      <el-button round @click="handleCancel">返回</el-button>
     </div>
     <editor
       ref="editor"
-      :initialValue="editorText"
+      :initial-value="editorText"
       :options="editorOptions"
       height="500px"
-      initialEditType="wysiwyg"
-      previewStyle="vertical"
+      initial-edit-type="wysiwyg"
+      preview-style="vertical"
       @focus ="onEditorFocus"
     />
     <el-dialog title="发布文章" :visible.sync="dialogFormVisible">
@@ -63,7 +64,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button @click="handleCancel">取 消</el-button>
         <el-button type="primary" @click="handleConfirm">确 定</el-button>
       </div>
     </el-dialog>
@@ -77,7 +78,7 @@ import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/vue-editor';
 import axios from 'axios';
 export default {
-  name: 'markdown',
+  name: 'operate',
   components: {
     editor: Editor
   },
@@ -165,25 +166,41 @@ export default {
   },
   methods: {
     handleCategoryItem(item, index) {
-      this.editorForm.classify = item.value;
-      this.activeIndex = index;
+      this.editorForm.classify = item.value
+      this.activeIndex = index
     },
     // 上传图片到服务器上
     async handleChangeUpload(file) {
-      let formData = new FormData();
-      formData.append('file', file.raw);
+      let formData = new FormData()
+      formData.append('file', file.raw)
       await axios.post("http://localhost:7001/uploadImg",formData).then(({ data })=>{
-        this.editorForm.image = `http://localhost:7001/${data.url}`;
+        this.editorForm.image = `http://localhost:7001/${data.url}`
       })
     },
     onEditorFocus(item) {
-      console.log(item);
+      console.log(item)
     },
     handleConfirm() {
       this.editorForm.content = this.$refs.editor.invoke('getHtml');
       axios.post("http://localhost:7001/article", this.editorForm).then(({ data })=>{
-        console.log(data);
+        this.handleCancel()
+        this.handleBack()
       })
+    },
+    handleCancel() {
+      this.editorForm = {
+          title: '',
+          image: '',
+          content: '',
+          classify: '',
+          summary: '',
+          tag: ''
+        }
+      this.editorText = ''
+      this.dialogFormVisible = false
+    },
+    handleBack() {
+      this.$router.push('/articles-management/articleList')
     }
   }
 }
