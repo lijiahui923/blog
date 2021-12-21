@@ -1,90 +1,104 @@
 <template>
 	<div id="body-warp">
 		<div class="body-bag">
-			<img class="body-media" :src="media.images.src" :alt="media.images.name" v-if="isAndroid">
-			<video v-else class="body-media" ref="video" :src="media.video.src" :poster='media.video.poster'
+			<!-- <img class="body-media" src="media.images.src" :alt="media.images.name" v-if="isAndroid"> -->
+			<video class="body-media" ref="video" :src="currentVideo.video" :poster='currentVideo.image'
 			 muted="muted" autoplay="autoplay" loop="loop" x5-video-player-fullscreen="true" webkit-playsinline="true"
-			 x-webkit-airplay="true" playsinline="true" :alt="media.video.name" />
+			 x-webkit-airplay="true" playsinline="true" :alt="currentVideo.name" />
 		</div>
 		<div class="body-header">
 			<slot name="header"></slot>
 		</div>
 		<div id="site-info">
-			<h1 id="site_title">{{$store.state.UserInfo.data.nickname}}</h1>
+			<!-- <h1 id="site_title">Lilala</h1> -->
 			<div id="site_subtitle">
-				<span id="subtitle" :class="[
-					this.titleIndex>=this.title.length && 'typecursor'
-					]">{{title.slice(0,titleIndex)}}</span>
+				<span id="subtitle" class="typecursor">{{title.slice(0,titleIndex)}}</span>
 			</div>
 			<div id="site_social_icons">
-				<a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&uin=1716815045&site=qq&menu=yes" target="_blank" title="联系博主">
+				<a class="social-icon" href="http://wpa.qq.com/msgrd?v=3&uin=2836755307&site=qq&menu=yes" target="_blank" title="qq">
 					<i class="iconfont icon-iconfonticon6"></i>
 				</a>
 				<a class="social-icon" href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MjM5ODI0MjA1NA==&scene=110#wechat_redirect"
 				 target="_blank" title="微信">
 					<i class="iconfont icon-gongzhonghao"></i>
 				</a>
-				<a class="social-icon" href="https://github.com/acid02/" target="_blank" title="GitHub">
+				<a class="social-icon" href="https://github.com/lijiahui923/" target="_blank" title="GitHub">
 					<i class="iconfont icon-github"></i>
 				</a>
-				<a class="social-icon" href="Mailto:1716815045@qq.com" target="_blank" title="邮箱">
+				<a class="social-icon" href="Mailto:lijiahui0063@163.com" target="_blank" title="邮箱">
 					<i class="iconfont icon-youxiang"></i>
 				</a>
-				<a class="social-icon" href="/contact/" target="_blank" title="图片和电影">
+				<!-- <a class="social-icon" href="/contact/" target="_blank" title="图片和电影">
 					<i class="iconfont icon-duomeiti6"></i>
-				</a>
+				</a> -->
 			</div>
 		</div>
-		<div id="scroll_down" @click="goToTop($event)">
+		<div id="scroll_down" @click="$emit('goHome')">
 			<i class="iconfont icon-35_xiangxiajiantou scroll_down-i"></i>
 		</div>
-		<!-- <remote-js :js-url="'https://res.wx.qq.com/open/js/jweixin-1.0.0.js'" :js-load-call-back="loadRongJs" v-if="isWeiXin"></remote-js> -->
 	</div>
 </template>
 
 <script>
-	const RemoteJs =()=> import('@/components/RemoteJs');
-	import { mapState } from 'vuex';
-	import { getquotations } from '@/api/UserInfo.js' //随机语录
 	export default {
-		name: 'BodyWrap',
-		components: {
-			RemoteJs
-		},
+		name: 'body-wrap',
+		components: {},
 		data() {
 			return {
 				titleIndex: 0,
-				title: "遥知朔漠多风雪，更待江南半月春。",
+				title: "梦笑开娇靥，眼鬟压落花；簟生玉腕，香汗浸红纱。",
 				isAndroid: this.judgeClient() == 'Android',
 				isWeiXin: this.isWeiXin(),
+        headerVideoList: [
+          {
+            image: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/preview/2404ac8bb9412a6b4764d7353801a1d2_preview.jpg',
+            video: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/preview/2404ac8bb9412a6b4764d7353801a1d2_preview.mp4',
+            name: '雷电少女'
+          },
+          {
+            image: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/live/32640b5d8d4501398475b5e4a7e3074d.mp4.jpg',
+            video: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/preview/89b2916e8f40bab6f3949d6657532f01_preview.mp4',
+            name: '早坂爱扭胯舞无缝'
+          },
+          {
+            image: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/live/d93c70e2113bacc8256b43b771334e5d.mp4.jpg',
+            video: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/preview/b77117bd5da3bf87cb58c3f14049105e_preview.mp4',
+            name: '崩坏德丽莎生病的少女'
+          },
+          {
+            image: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/live/b8e7ec1c3af84097f0d0221ef44f12b2.mp4.jpg',
+            video: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/preview/8591a1c52ee67fbe4038a97caea9e0c9_preview.mp4',
+            name: 'Candle喵'
+          },
+          {
+            image: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/live/0ebf7c6dd7822e07eaac96e134d1627c.mp4.jpg',
+            video: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/preview/a1935b5dc4c96f941b0a981c913ac65f_preview.mp4',
+            name: '可爱女孩跳舞'
+          }
+        ],
+        currentVideo: {}
 			}
 		},
-		computed: mapState('UserInfo', ['media']),
 		async created() {
-			
 			//微信视频播放
 			try{
 				window.WeixinJSBridge.invoke('getNetworkType', {}, (res) => {
-					
 					let elevideo = this.$refs.video;
-					
 					elevideo.play()
-					
 				})
 			}catch(e){}
-			
-			
-			
-			window.addEventListener('scroll', this.handleScroll);
-			
-			let { msg } = await getquotations();
-			this.title = msg;
-			
 			this.Subtitle()
+      this.currentVideo = this.headerVideoList[Math.floor(Math.random() * this.headerVideoList.length)];
 		},
+    mounted() {
+      window.addEventListener('scroll', this.handleScroll);
+    },
+    destroyed() {
+      window.removeEventListener('scroll', this.handleScroll);
+    },
 		methods: {
 			Subtitle() {
-				let titmsg = this.title.length
+				let titmsg = this.title.length;
 				let time = setInterval(() => {
 					if (this.titleIndex < titmsg) {
 						++this.titleIndex;
@@ -119,11 +133,7 @@
 					}, false);
 				}
 
-			},
-			goToTop(event) {
-				// console.log(document.body.scrollIntoView())
-				this.$emit('goToTop')
-			},
+			}
 		},
 		watch:{
 			$route: {

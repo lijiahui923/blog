@@ -4,7 +4,7 @@
  * @Autor: lijiahui
  * @Date: 2021-12-07 16:48:34
  * @LastEditors: lijiahui
- * @LastEditTime: 2021-12-09 16:17:02
+ * @LastEditTime: 2021-12-15 17:15:00
  */
 'use strict';
 
@@ -36,7 +36,13 @@ class ArticleController extends Controller {
 
     async show() {
         const ctx = this.ctx;
-        ctx.body = await ctx.model.Article.findByPk(toInt(ctx.params.id));
+				console.log(ctx.params.id);
+				const data = await ctx.model.Article.findByPk(ctx.params.id);
+        ctx.body = {
+					data: data,
+					msg: '查询成功',
+					code: 200
+			}
     }
 
     async create() {

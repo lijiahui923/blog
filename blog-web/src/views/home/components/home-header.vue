@@ -2,7 +2,7 @@
 	<header id="Header" class="body-header" v-show="scroll.top" :class="[scroll.visible&&'visible',scroll.fixed&&'fixed']">
 		<nav class="SubMenu">
 			<ul class="SubMenu-left">
-				<li class="SubMenu-name">
+				<li class="SubMenu-name" @click="pages(0)">
 					<router-link to="/">我会瘦的MM</router-link>
 				</li>
 			</ul>
@@ -14,7 +14,7 @@
 			<ul class="SubMenu-right">
 				
 				<li @click="pages(item.type)" v-for="(item,index) in header" :key='index'>
-					<router-link to="/">
+					<router-link :to="{name:item.url}">
 						<i class="iconfont" :class="item.icon"></i>
 						<span>{{item.name}}</span>
 					</router-link>
@@ -29,7 +29,7 @@
 
 <script>
 	export default {
-		name: "Header",
+		name: "home-header",
 		data() {
 			return {
 				scroll: {

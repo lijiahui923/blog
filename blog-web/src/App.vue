@@ -1,3 +1,11 @@
+<!--
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: lijiahui
+ * @Date: 2021-11-25 11:01:44
+ * @LastEditors: lijiahui
+ * @LastEditTime: 2021-12-13 14:15:33
+-->
 <template>
   <div id="app">
 	  <!-- <Masking v-if='$store.state.UserInfo.isLoading'>
@@ -18,11 +26,11 @@
 </template>
 
 <script>
-import Masking from '@/components/Masking' //蒙层
+// import Masking from '@/components/Masking'
 
 export default {
   name: 'App',
-  components: {Masking},
+  // components: {Masking},
   data(){
 	 return {
 		//  show:true,

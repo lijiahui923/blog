@@ -1,3 +1,11 @@
+/*
+ * @Description: 
+ * @Version: 1.0
+ * @Autor: lijiahui
+ * @Date: 2021-11-25 11:01:44
+ * @LastEditors: lijiahui
+ * @LastEditTime: 2021-12-13 14:16:20
+ */
 import Vue from 'vue'
 import '@/assets/style/reset.css'
 import '@/assets/style/iconfont.css'
@@ -6,7 +14,7 @@ import router from '@/router'
 import store from '@/store'
 import './registerServiceWorker'
 
-import loading from './directive/loading' 
+// import loading from './directive/loading' 
 
 //全局过滤器
 import * as filters from './filters'
@@ -28,16 +36,16 @@ Object.keys(utils).forEach(key => {
 //Loading
 import Loading from '@/components/Loading.vue'
 
-import './registerServiceWorker'
-Vue.component('Loading',Loading)
-Vue.use(loading);
+// import './registerServiceWorker'
+// Vue.component('Loading',Loading)
+// Vue.use(loading);
 Vue.config.productionTip = false
 
 //控制台
 // import VConsole from 'vconsole'
 // const vConsole = new VConsole()
 
-store.dispatch('UserInfo/fetchDatas')
+// store.dispatch('UserInfo/fetchDatas')
 
 
 //微信分享

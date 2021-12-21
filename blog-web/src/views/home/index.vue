@@ -1,76 +1,53 @@
 <template>
-	<div id="Home" v-loding="$store.state.UserInfo.isLoading">
+	<div id="Home">
 		<transition name="fade">
-			<BodyWrap @goToTop="backTop">
+			<body-wrap @goHome="onGoMain">
 				<Header slot='header' @MaskShow="MaskShow" />
-			</BodyWrap>
+			</body-wrap>
 		</transition>
 			<main class="layout_page" id='pages' ref='page'>
 				<section class="bgcolor">
 					<div class="aside aside_left">
-						<UserCard />
+						<user-card />
 						<div class="aside-margin">
-							<Classify :Classifydata="data.article" /><!-- 分类 -->
+							<!-- <Classify :Classifydata="MaskShow" />分类 -->
 						</div>
 						<div class="aside-margin">
-							<Label :Labeldata="data.label" /> <!-- 标签 -->
+							<!-- <Label :Labeldata="MaskShow" /> 标签 -->
 						</div>
 						<div class="aside-margin" v-if="winWidth<=1200">
-							<Notice />
+							<!-- <Notice /> -->
 						</div>
 					</div>
 					<div class="aside aside_center">
-						<Breadcrumb v-show="$route.meta.BreadUrl" />
-						<!-- <Tags v-if="$route.params.name"/> -->
-						<keep-alive>
-							<router-view :Classifydata='data.article' :Labeldata="data.label"></router-view>
-						</keep-alive>
+						<!-- <Breadcrumb v-show="$route.meta.BreadUrl" /> -->
+						<article-list />
 					</div>
 					<div class="aside aside_right" v-if="winWidth>1200">
-						<Notice />
+						<!-- <Notice /> -->
 					</div>
 				</section>
-				<Masking :show="MaskingShow" @MaskShow="MaskShow">
+				<!-- <Masking :show="MaskingShow" @MaskShow="MaskShow">
 					<Mobile @MaskShow="MaskShow"/>
-				</Masking>
+				</Masking> -->
 			</main>
-			<GoUp />
-			<Footer />
+			<!-- <GoUp />
+			<Footer /> -->
 	</div>
 </template>
 
 <script>
-	import { mapState } from 'vuex';
-	import BodyWrap from '@/components/BodyWrap' //第一页背景
-	const Header = () => import('@/components/Header') //头部
-	const UserCard = () => import('@/components/UserCard') //用户信息
-	const Tags = () => import('@/components/Tags') //文章模块标签
-	const Breadcrumb = () => import('@/components/Breadcrumb') //面包屑导航
-
-	const Notice = () => import('@/components/Notice') // 公告
-
-	const Classify = () => import('@/components/Classify') //分类
-	const Label = () => import('@/components/Label') //标签
-	const Masking = () => import('@/components/Masking') //蒙层
-
-	const GoUp = () => import('@/components/GoUp') //返回顶部
-	const Mobile = () => import('@/components/Mobile') //移动端点击显示个人信息
-	const Footer = () => import('@/components/Footer') //底部备案号
+import BodyWrap from './components/body-wrap.vue';
+import Header from '@/components/Header.vue';
+import UserCard from './components/user-card.vue';
+import ArticleList from './components/article-list.vue';
 	export default {
-		name: 'Home',
+		name: 'home',
 		components: {
-			BodyWrap,
+      BodyWrap,
 			Header,
 			UserCard,
-			Tags,
-			Breadcrumb,
-			Notice,
-			Masking,
-			Classify,
-			Label,
-			GoUp,
-			Mobile,
-			Footer
+			ArticleList
 		},
 		props: {
 			winWidth: {
@@ -80,36 +57,19 @@
 		},
 		data() {
 			return {
-				MaskingShow: false,
+				MaskingShow: true,
 			}
 		},
-		computed: mapState('UserInfo', ['data']),
+		// computed: mapState('UserInfo', ['data']),
 		methods: {
 			//头部点击侧边导航栏
 			MaskShow() {
 				this.MaskingShow = !this.MaskingShow
 			},
 			//返回底部
-			backTop() {
+			onGoMain() {
 				this.wayscroll(this.$refs.page);
-			},
-		},
-		watch:{
-			$route: {
-			    handler: function(val, oldVal){
-					// console.log(val.name)
-					//监听是否点击分类页/标签
-				  let routname =['Label','Labellist','Classify','Classifylist']
-			      if(routname.includes(val.name)){
-					  this.$nextTick(()=>{
-						  this.backTop()
-					  }) 
-				  }
-			    },
-			    // 深度观察监听
-			    // deep: true
-				immediate:true
-			  }
+			}
 		}
 	}
 </script>

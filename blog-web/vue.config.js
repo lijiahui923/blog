@@ -1,4 +1,10 @@
 
+'use strict'
+const path = require('path')
+
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
 module.exports = {
     /** 区分打包环境与开发环境
      * process.env.NODE_ENV==='production'  (打包环境)
@@ -29,7 +35,16 @@ module.exports = {
 	      .loader('pug-html-loader')
 	      .end()
 	},
-    // configureWebpack: () => {}, // CSS 相关选项
+  configureWebpack: {
+    // provide the app's title in webpack's name field, so that
+    // it can be accessed in index.html to inject the correct title.
+    // name: name,
+    resolve: {
+      alias: {
+        '@': resolve('src')
+      }
+    }
+  },
     css: {
       // 将组件内部的css提取到一个单独的css文件（只用在生产环境）
       // 也可以是传递给 extract-text-webpack-plugin 的选项对象
@@ -132,43 +147,19 @@ module.exports = {
       https: false,
       hotOnly: false, // See https://github.com/vuejs/vue-cli/blob/dev/docs/cli-service.md#configuring-proxy
       proxy: {
-    //     '/user':{
-    //       target:'http://localhost:3000',
-    //       changeOrigin: true, //允许跨域
-		  // ws: true,
-    //       pathRewrite: {
-    //         '^/user': ''
-    //       }
-    //     },
-	    [process.env.VUE_APP_USER_API]: {
-	        target: process.env.VUE_API_DEV_USER,
-	        changeOrigin: true,
-	        pathRewrite: {
-	          ['^' + process.env.VUE_APP_USER_API]: ''
-	        }
-	     },
-		[process.env.VUE_APP_BASE_API]: {
-	        target: process.env.VUE_API_DEV_TARGET,
-	        changeOrigin: true,
-	        pathRewrite: {
-	          ['^' + process.env.VUE_APP_BASE_API]: ''
-	        }
-	     },
-	     '/wxapi': {
-	        target: 'https://wxapi.sh-datastone.com',
-	        changeOrigin: true,
-	        pathRewrite: {
-	          '^/wxapi': ''
-	        }
-	     }
-	
-      } // string | Object
+        [process.env.VUE_APP_BASE_API]: {
+            target: process.env.VUE_APP_BASE_URL,
+            changeOrigin: true,
+            pathRewrite: {
+              ['^' + process.env.VUE_APP_BASE_API]: ''
+            }
+         }
+      }
       // before: app => {}
     }, // 第三方插件配置
   
     pluginOptions: {
       // ...
-    },
-	
+    }
   };
   
