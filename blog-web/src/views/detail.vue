@@ -14,37 +14,21 @@
 							<span class="post-meta__date-created" :title="currentArticle.create_date">
 								发表于 {{currentArticle.create_date}}
 							</span>
-							<!-- <span class="post-meta__separator">|</span>
-							<span class="post-meta__date-updated" title="更新于 2020-07-27 16:24:36">
-								更新于 2020-07-27
-							</span> -->
+							<span class="post-meta__separator">|</span>
+              <span>{{currentArticle.title}}</span>
 						</time>
-						<span class="post-meta__categories">
-							<span class="post-meta__separator">|</span>
-							<!-- <a class="post-meta__categories" @click.prevent="$router.back(-1)">{{$route.params.parent}}</a> -->
-						</span>
 					</div>
-					<!-- <div class="meta-secondline">
-						<span class="post-meta-wordcount">
-							<span>字数总计: </span>
-							<span class="word-count">{{Allarticles.content | capitalize}}</span>
-							<span class="post-meta__separator">|</span>
-							<span>阅读时长: {{Allarticles.content | capitalize(500)}} 分钟</span>
-							<span class="post-meta__separator">|</span>
-							<span>阅读量: {{Allarticles.view || 0}}</span>
-						</span>
-					</div> -->
 				</div>
 			</div>
 		</div>
 		<main class="layout_post">
 			<section class="content-inner">
 				<article class="aside_left" v-if="winWidth>1200">
-					<!-- <UserCard /> -->
+					<UserCard />
 					<!-- <div class="aside-margin">
 						<Notice />
 					</div> -->
-          <nav class="article-catalog">
+          <nav class="article-catalog" v-show="navList.length > 0">
             <div class="catalog-title">目录</div>
             <div class="catalog-body">
                 <ul class="catalog-list">
@@ -72,20 +56,20 @@
 		<Masking :show="MaskingShow" @MaskShow="MaskShow">
 			<Mobile @MaskShow="MaskShow"/>
 		</Masking>
-		<!-- <Footer />
-		<GoUp /> -->
+		<Footer />
+		<GoUp />
 	</div>
 </template>
 
 <script>
 import { queryById } from '@/api/home'
 	const Header = () => import('@/components/Header') //头部
-	const UserCard = () => import('@/components/UserCard') //用户信息
 	const Notice = () => import('@/components/Notice') // 公告
 	const Masking = () => import('@/components/Masking') //蒙层
 	const Mobile = () => import('@/components/Mobile') //移动端点击显示个人信息
 	const Footer = () => import('@/components/Footer') //底部备案号
 	const GoUp = () => import('@/components/GoUp') //返回顶部
+import UserCard from './home/components/user-card.vue';
 import { toArrayTree } from 'xe-utils';
 	export default {
 		name: "detail",
@@ -110,38 +94,13 @@ import { toArrayTree } from 'xe-utils';
     mounted() {
       setTimeout(() => {
         this.$nextTick(() => {
-          let currentChildrenParentId = '';
-          const tagList = [];
-          this.$refs.content.childNodes.forEach((element, index) => {
-            const titleTag = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6']
-            let  parentId = 'root';
-            if (titleTag.includes(element.nodeName)) {
-              console.log(element.nodeName, index);
-              const id = `header-${index}`
-              element.setAttribute('id', id)
-              if (element.nodeName === 'H1') {
-                parentId = 'root';
-                currentChildrenParentId = id;
-              } else {
-                parentId = currentChildrenParentId;
-              }
-              tagList.push({
-                parentId: parentId,
-                id: id,
-                title: element.innerHTML,
-                nodeName: element.nodeName
-              })
-            }
-          });
-          this.navList = toArrayTree(tagList, { parentKey: 'parentId', key: 'id', children: 'children' })
+          this.getCatalog();
         })
       }, 400);
     },
 		created() {
-      queryById(this.$route.params.id).then(({ data }) => {
-        this.currentArticle = data;
-      })
       
+      this.getDetailById()
 		},
 		methods: {
 			//头部点击侧边导航栏
@@ -150,6 +109,47 @@ import { toArrayTree } from 'xe-utils';
 			},
       handleActive(id) {
         this.currentActive = id;
+      },
+      formatDate(time) {
+          let date = new Date(time);
+          return date.toJSON().substr(0, 19).replace('T', ' ').replace(/-/g, '-');
+      },
+      // 查询详情
+      getDetailById() {
+        queryById(this.$route.params.id).then(({ data }) => {
+          if (data.create_date) {
+            data.create_date = this.formatDate(Number(data.create_date))
+          } else {
+            data.create_date = ''
+          }
+          this.currentArticle = data;
+        })
+      },
+      // 目录
+      getCatalog() {
+        let currentChildrenParentId = '';
+        const tagList = [];
+        this.$refs.content.childNodes.forEach((element, index) => {
+          const titleTag = ['H1', 'H2', 'H3', 'H4', 'H5', 'H6']
+          let  parentId = 'root';
+          if (titleTag.includes(element.nodeName)) {
+            const id = `header-${index}`
+            element.setAttribute('id', id)
+            if (element.nodeName === 'H1') {
+              parentId = 'root';
+              currentChildrenParentId = id;
+            } else {
+              parentId = currentChildrenParentId;
+            }
+            tagList.push({
+              parentId: parentId,
+              id: id,
+              title: element.innerHTML,
+              nodeName: element.nodeName
+            })
+          }
+        });
+        this.navList = toArrayTree(tagList, { parentKey: 'parentId', key: 'id', children: 'children' })
       }
 		}
 	}
@@ -363,6 +363,7 @@ import { toArrayTree } from 'xe-utils';
       background: #fff;
       border-radius: 4px;
       /* padding: 0; */
+      margin-top: 10px;
   }
   .catalog-title {
       font-weight: 500;
@@ -375,7 +376,7 @@ import { toArrayTree } from 'xe-utils';
   }
   
   .catalog-body {
-      height: 460px;
+      max-height: 460px;
       margin: 5px;
       overflow: auto;
       

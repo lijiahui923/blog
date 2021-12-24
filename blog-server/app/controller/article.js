@@ -4,7 +4,7 @@
  * @Autor: lijiahui
  * @Date: 2021-12-07 16:48:34
  * @LastEditors: lijiahui
- * @LastEditTime: 2021-12-15 17:15:00
+ * @LastEditTime: 2021-12-22 15:21:42
  */
 'use strict';
 
@@ -19,13 +19,24 @@ function toInt(str) {
 class ArticleController extends Controller {
     async index() {
         const ctx = this.ctx;
-        const { pageNum = 1, pageSize = 10 } = ctx.query;
+        const Op = this.ctx.model.Sequelize.Op;
+        const { pageNum = 1, pageSize = 10, search } = ctx.query;
+        console.log(pageNum, pageSize)
         // 分页
         const query = {
             offset: toInt(pageNum) * toInt(pageSize) - toInt(pageSize),
             limit: toInt(pageSize)
         };
-        const data = await ctx.model.Article.findAndCountAll({ ...query, raw: true });
+        let where = {}
+        if (search) {
+          where = {
+            [Op.or]: [{ title: { [Op.like]: '%' + search + '%' } }, //like和or连用
+                    { content: { [Op.like]: '%' + search + '%' } },
+                    { summary: { [Op.like]: '%' + search + '%' } },
+                ]
+          }
+        }
+        const data = await ctx.model.Article.findAndCountAll({ where, ...query, raw: true });
 				ctx.status = 200;
         ctx.body = {
             data: data,

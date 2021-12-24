@@ -74,6 +74,16 @@
             image: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/live/0ebf7c6dd7822e07eaac96e134d1627c.mp4.jpg',
             video: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/preview/a1935b5dc4c96f941b0a981c913ac65f_preview.mp4',
             name: '可爱女孩跳舞'
+          },
+          {
+            image: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/live/83bfbe205b94fd7d682d1baab234adbc.mp4.jpg',
+            video: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/preview/8a71d423e81712206b8d53ac9b547100_preview.mp4',
+            name: '初音'
+          },
+          {
+            image: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/live/98fa8b53493e8e318a05f3da2b3bf9a3.mp4.jpg',
+            video: 'https://img-baofun.zhhainiao.com/pcwallpaper_ugc/preview/036bcc3e061cd08276621da3a8f6a061_preview.mp4',
+            name: '旗袍初音'
           }
         ],
         currentVideo: {}

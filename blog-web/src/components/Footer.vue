@@ -1,43 +1,7 @@
 <template>
 	<footer id="footer" data-type="color">
 		<div id="footer-wrap">
-			<div class="copyright">©2020 By PluShine</div>
-			<div class="framework-info">
-				<span>驱动框架&nbsp;</span>
-				<a href="https://cn.vuejs.org/"  style="display: flex;align-items: center;" target="_blank">
-					<svg width="20px" height="20px" t="1596098785857" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1693"><path d="M615.6 123.6h165.5L512 589.7 242.9 123.6H63.5L512 900.4l448.5-776.9z" fill="#41B883" p-id="1694"></path><path d="M781.1 123.6H615.6L512 303 408.4 123.6H242.9L512 589.7z" fill="#34495E" p-id="1695"></path></svg> 
-					<span>Vue</span>
-				</a>
-				<span class="footer-separator">|</span>
-				<span> 网站加载耗时 {{loadTime==0?'计算中...':loadTime+'ms'}} </span>
-				<!-- <a href="PluShine" target="_blank"><span>Butterfly</span></a> -->
-			</div>
-			<div class="footer_custom_text">
-				<a href="https://su.baidu.com/" target="_blank">
-				    <img align="absmiddle" height="20px" class="loading" src="../assets/images/logo-bg-color.svg">
-				</a>
-				<span>&nbsp;&amp;&nbsp;&nbsp;</span>
-				<a href="https://www.jsdelivr.com/" target="_blank">
-				    <img align="absmiddle"  height="20px" class="loading" src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/06/26/7b059f8e9de1a268fdeb80109a192925.png">
-			    </a>
-			</div>
-			<div class="copyright">
-				<span>本站运行了</span>
-				<span v-for="(itme,key) in date" :key='key' v-if='itme!=0 || key!="n"&& key!="y" && key!="r" '>
-				{{itme<10 ? '0' +itme:itme}}
-				{{key=='n'?'年':
-				key=='y'?'月':
-				key=='r'?'天':
-				key=='xs'?'小时':
-				key=='fz'?'分钟':
-				key=='miao'?'秒':''}}</span>
-			</div>
-			<div class="icp">
-				<a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
-					<img class="icp-icon loading" src="https://cdn.jsdelivr.net/gh/xingjiahui/CDN@latest/2020/06/06/0bcff08ca63f75f26d0f0db7290665fc.png">
-					<span>{{beiAn}}</span>
-				</a>
-			</div>
+			<div class="copyright">©Copyright 2021 我会瘦的MM</div>
 		</div>
 	</footer>
 </template>
@@ -127,10 +91,11 @@
 		background-color: azure;
 	}
 	#footer #footer-wrap {
-	    color: #333;
+	  color: #333;
 		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
+    justify-content: center;
+		/* flex-wrap: wrap;
+		justify-content: space-between; */
 		align-items: center;
 	}
 	#footer-wrap {

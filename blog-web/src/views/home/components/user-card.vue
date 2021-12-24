@@ -21,23 +21,23 @@
 			</a></div>
 		<div class="textwidget">
 			<div class="links-of-author motion-element">
-				<span class="links-of-author-item">
-					<a href="http://wpa.qq.com/msgrd?v=3&uin=1716815045&site=qq&menu=yes" target="_blank" title="qq" class="el-tooltip item">
+				<!-- <span class="links-of-author-item">
+					<a href="#" target="_blank" title="qq" class="el-tooltip item">
 						<i class="iconfont icon-iconfonticon6"></i>
 					</a>
 				</span>
 				<span class="links-of-author-item">
-					<a href="http://mp.weixin.qq.com/mp/getmasssendmsg?__biz=MjM5ODI0MjA1NA==#wechat_redirect" target="_blank" title="联系博主" class="el-tooltip item">
+					<a href="#" target="_blank" title="联系博主" class="el-tooltip item">
 					   <i class="iconfont icon-gongzhonghao"></i>
 				    </a>
-				</span>
+				</span> -->
 				<span class="links-of-author-item">
-					<a href="https://github.com/lijiahui923/" target="_blank" title="GitHub" class="el-tooltip item">
-						<i class="iconfont icon-github"></i>
+					<a href="https://github.com/lijiahui923/" target="_blank" title="lijiahui923" class="el-tooltip item">
+						<i class="iconfont icon-github-fill"></i>
 					</a>
 				</span>
 				<span class="links-of-author-item">
-					<a href="Mailto:lijiahui0063@163.com" target="_blank" title="邮箱" class="el-tooltip item">
+					<a href="Mailto:lijiahui0063@163.com" target="_blank" title="lijiahui0063@163.com" class="el-tooltip item">
 						<i class="iconfont icon-youxiang"></i>
 					</a>
 				</span>

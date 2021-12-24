@@ -31,8 +31,8 @@
 					<Mobile @MaskShow="MaskShow"/>
 				</Masking> -->
 			</main>
-			<!-- <GoUp />
-			<Footer /> -->
+			<GoUp />
+			<Footer />
 	</div>
 </template>
 
@@ -41,13 +41,17 @@ import BodyWrap from './components/body-wrap.vue';
 import Header from '@/components/Header.vue';
 import UserCard from './components/user-card.vue';
 import ArticleList from './components/article-list.vue';
+import GoUp from '@/components/GoUp';
+import Footer from '@/components/Footer';
 	export default {
 		name: 'home',
 		components: {
       BodyWrap,
 			Header,
 			UserCard,
-			ArticleList
+			ArticleList,
+      GoUp,
+      Footer
 		},
 		props: {
 			winWidth: {

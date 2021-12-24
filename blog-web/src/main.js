@@ -4,11 +4,11 @@
  * @Autor: lijiahui
  * @Date: 2021-11-25 11:01:44
  * @LastEditors: lijiahui
- * @LastEditTime: 2021-12-13 14:16:20
+ * @LastEditTime: 2021-12-22 13:52:22
  */
 import Vue from 'vue'
 import '@/assets/style/reset.css'
-import '@/assets/style/iconfont.css'
+import '@/assets/style/iconfont/iconfont.css'
 import App from './App.vue'
 import router from '@/router'
 import store from '@/store'

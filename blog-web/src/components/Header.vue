@@ -12,7 +12,10 @@
 				</li>
 			</ul>
 			<ul class="SubMenu-right">
-				
+				<div class="search">
+            <input class="right-input" type="text" placeholder="请输入您要搜索的内容..." v-model="searchValue">
+            <i class="iconfont icon-sousuo" @click="searchContent"></i>
+      </div>
 				<li @click="pages(item.type)" v-for="(item,index) in header" :key='index'>
 					<router-link to="/">
 						<i class="iconfont" :class="item.icon"></i>
@@ -28,6 +31,7 @@
 </template>
 
 <script>
+import { fetchList } from '@/api/home'
 	export default {
 		name: "Header",
 		data() {
@@ -41,7 +45,8 @@
           {name:'主页',url:'Tags',icon:'icon-zhuye',type:0},
           {name:'标签',url:'Label',icon:'icon-zhifeiji',type:'label',},
           {name:'分类',url:'Classify',icon:'icon-fenlei',type:'article'}
-        ]
+        ],
+        searchValue: ''
 			}
 		},
 		created() {
@@ -97,7 +102,11 @@
 					}
 					
 				}
-			}
+			},
+      searchContent() {
+        const data = fetchList({search: this.searchValue})
+        console.log(data)
+      }
 		}
 	};
 </script>
@@ -175,7 +184,29 @@
 		width: 100%;
 		animation: 1s ease 0s 1 normal none running headerNoOpacity;
 	}
-
+  .search {
+    position: relative;
+    width: 350px;
+    border-radius: 20px;
+    height: 30px;
+    background-color: #f2f2f2;
+  }
+  .right-input {
+    width: 300px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 20px;
+    border: 0;
+    padding: 0 10px;
+    background-color: #f2f2f2;
+  }
+  i.iconfont.icon-sousuo {
+      position: absolute;
+      right: 15px;
+      top: 7px;
+      color: #666;
+      cursor: pointer;
+  }
 	@keyframes headerNoOpacity {
 		from {
 			transform: translateY(-50px);
